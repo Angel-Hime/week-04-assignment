@@ -5,24 +5,41 @@
     <link rel="shortcut icon" href=" " type="image/x-icon" />
     <!-- add favicon above -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/app.js" defer></script>
-    <title>Assignment Feedback</title>
+    <title>Assignment Feedback Form</title>
   </head>
   <body>
-    <h1>Assignment Feedback</h1>
+    <h1>Assignment Feedback Form</h1>
 
     <!-- TODO: an elemen to allow users to iput data -->
     <!--Create a form with labels, input fields, submit button -->
     <!-- use the correct tag syntax -->
-    <form>
-      <section id="guestDetails">
-        <label for=""></label>
-        <input type="firstName" />
-
-        <label for=""></label>
-        <input type="lastName" />
+    <form id="feedbackForm">
+      <!-- name details from user-->
+      <section id="guestNameDetails">
+        <div id="firstName">
+          <label for="firstName">First Name: </label>
+          <input name="firstName" type="text" required />
+        </div>
+        <div id="secondName">
+          <label for="secondName">Second Name:</label>
+          <input name="secondName" type="text" required />
+        </div>
+      </section>
+      <!-- comment from user -->
+      <section id="guestComment">
+        <div id="commentData">
+          <label for="commentData">Comment: </label>
+          <input name="commentData" type="text" required />
+        </div>
+      </section>
+      <!-- submit button -->
+      <section id="submissionSection">
+        <button id="submitFeedback">Submit</button>
       </section>
     </form>
+
+    <!-- TODO: add a section only for our dom manipulation details -->
   </body>
 </html>
