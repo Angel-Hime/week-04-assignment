@@ -3,17 +3,9 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  cursor: default;
 }
 
-/* responsive design */
-/* TODO: make sure that this is designed to work on various screen sizes */
-/* WIREFRAME PLANNING */
-
-/* think where to put flex, where to put grid */
-
-/* media queries */
-
-/* accessibility - design principles */
 body {
   background-color: whitesmoke;
   display: flex;
@@ -25,14 +17,14 @@ h1 {
   background-color: pink;
   color: rgb(255, 255, 255);
   text-align: center;
-  padding: 10vh 0 10vh 0;
+  padding: 8vh 0 8vh 0;
   margin: 3rem 3rem 0 3rem;
   border-radius: 10px;
   text-shadow: 15px 5px 7px rgb(225, 147, 160);
 }
 
-#feedbackForm {
-  display: grid;
+form {
+  background-color: pink;
 }
 
 #guestNameDetails {
@@ -40,26 +32,52 @@ h1 {
   flex-direction: row;
   justify-content: center;
   gap: 10vw;
-  background-color: pink;
+
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 5vh 0 5vh 0;
   margin: 0 3rem 0 3rem;
-  border-radius: 10px;
+
   text-shadow: 15px 5px 7px rgb(225, 147, 160);
 }
+@media (max-width: 700px) {
+  #guestNameDetails {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+#guestNameDetails input {
+  padding: 0 1vw 0 1vw;
+  min-height: 5vh;
+  border-radius: 3rem;
+}
+
 #guestComment {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 10vw;
-  background-color: pink;
+
   color: rgb(255, 255, 255);
   text-align: center;
   padding: 5vh 0 5vh 0;
   margin: 0 3rem 0 3rem;
-  border-radius: 10px;
+
   text-shadow: 15px 5px 7px rgb(225, 147, 160);
+}
+#commentData input {
+  padding: 0 1vw 0 1vw;
+  min-height: 10vh;
+  min-width: 40vw;
+  border-radius: 3rem;
+}
+
+input:hover {
+  animation-name: glow;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  box-shadow: inset 5px 5px 10px whitesmoke;
 }
 
 #submitButtonSection {
@@ -67,33 +85,116 @@ h1 {
   flex-direction: row;
   justify-content: right;
   gap: 10vw;
-  background-color: pink;
+
   color: rgb(255, 255, 255);
   text-align: center;
-  padding: 0 5vw 5vh 0;
+  padding: 0 15vw 5vh 0;
   margin: 0 3rem 0 3rem;
-  border-radius: 10px;
+
   text-shadow: 15px 5px 7px rgb(225, 147, 160);
 }
-
+#submitFeedback {
+  min-width: 5rem;
+  min-height: 3rem;
+  background-color: whitesmoke;
+  border: 5px ridge pink;
+  border-radius: 10px;
+}
+#submitFeedback:hover {
+  cursor: pointer;
+  animation-name: glow;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  box-shadow: inset 5px 5px 10px whitesmoke;
+}
+@keyframes glow {
+  0% {
+    background-color: whitesmoke;
+    border-color: pink;
+  }
+  25% {
+    background-color: pink;
+    border-color: whitesmoke;
+  }
+  50% {
+    background-color: whitesmoke;
+    border-color: pink;
+  }
+  75% {
+    background-color: pink;
+    border-color: whitesmoke;
+  }
+  100% {
+    background-color: whitesmoke;
+    border-color: pink;
+  }
+}
+#submitFeedback:active {
+  animation-name: shake;
+  animation-duration: 30ms;
+  animation-iteration-count: 2;
+}
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 #postsContainer {
   display: flex;
   flex-direction: column-reverse;
+  justify-content: center;
 
-  background-color: pink;
   color: rgb(255, 255, 255);
 
-  padding: 0 5vw 5vh 0;
-  margin: 0 3rem 0 3rem;
+  padding: 5vh 3vw 5vh 3vw;
+  margin: 0 3rem 3rem 3rem;
   border-radius: 10px;
+
+  max-height: 50vh;
+  overflow: scroll;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: monospace;
 }
 
 .userEntry {
   display: flex;
   flex-direction: row;
   text-align: center;
-  background-color: rgb(251, 251, 251);
+  justify-content: space-between;
+
+  background-color: whitesmoke;
   color: pink;
-  padding: 0 0 0 0;
+  padding: 0.5vw;
   margin: 1rem;
+  gap: 2vw;
 }
+
+.userNameClass {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.userEntryNav {
+  position: relative;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+}
+/* #likeButton {
+} */

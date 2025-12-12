@@ -15,23 +15,41 @@
     <!-- TODO: an elemen to allow users to iput data -->
     <!--Create a form with labels, input fields, submit button -->
     <!-- use the correct tag syntax -->
+
     <form id="feedbackForm">
       <!-- name details from user-->
       <section id="guestNameDetails">
         <div id="firstName">
           <label for="firstName">First Name: </label>
-          <input name="firstName" type="text" required />
+          <input
+            name="firstName"
+            type="text"
+            placeholder="required"
+            required
+            maxlength="15"
+          />
         </div>
         <div id="secondName">
           <label for="secondName">Second Name:</label>
-          <input name="secondName" type="text" required />
+          <input
+            name="secondName"
+            type="text"
+            placeholder="required"
+            required
+            maxlength="30"
+          />
         </div>
       </section>
       <!-- comment from user -->
       <section id="guestComment">
         <div id="commentData">
           <label for="commentData">Comment: </label>
-          <input name="commentData" type="text" required />
+          <input
+            name="commentData"
+            type="text"
+            placeholder="Please tell me what you think about my week 4 assignment submission!"
+            required
+          />
         </div>
       </section>
       <!-- submit button -->
@@ -41,6 +59,8 @@
     </form>
 
     <!-- TODO: add a section only for our dom manipulation details -->
-    <section id="postsContainer"></section>
+    <section id="postsContainer">
+      <!-- TODO: add column titles for UI/UX -->
+    </section>
   </body>
 </html>

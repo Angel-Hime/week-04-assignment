@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 //port
-const PORT = 8080;
+const PORT = 8080; //! Server link? Not what Manny said tho
 app.listen(PORT, () => {
   console.info(`Server is running in port ${PORT}`);
 });
@@ -25,9 +25,18 @@ app.get("/", (_, res) => {
 //=======================================================
 
 //TODO: a route to READ data from the db
-app.get("/DATABASE_URL", async function (_, res) {
+app.get("/feedback", async function (_, res) {
   const query = await db.query(
-    `SELECT firstname, secondname, comment FROM feedback;`
+    `SELECT firstname, secondname, comment, likes FROM feedback;`
+  );
+  console.log(query);
+  res.json(query.rows);
+});
+
+//TODO: a route to READ data from the db
+app.get("/feedback/new", async function (_, res) {
+  const query = await db.query(
+    `SELECT firstname, secondname, comment, likes FROM feedback;`
   );
   console.log(query);
   res.json(query.rows);
@@ -36,12 +45,12 @@ app.get("/DATABASE_URL", async function (_, res) {
 //TODO: a route to CREATE data in the db
 app.post("/newcomment", (req, _) => {
   const newComment = req.body.formValues;
-  console.log(newComment); // so we see what we are posting in the server terminal
+  // console.log(newComment); // so we see what we are posting in the server terminal
 
   const query = db.query(
-    `INSERT INTO feedback (firstname, secondname, comment) VALUES ($1, $2, $3)`,
-    [newComment.firstName, newComment.secondName, newComment.commentData]
-  );
+    `INSERT INTO feedback (firstname, secondname, comment, likes) VALUES ($1, $2, $3, $4)`,
+    [newComment.firstName, newComment.secondName, newComment.commentData, 0]
+  ); //! THIS WILL GIVE US A NULL IN LIKES - PENDING SOME CODE TO SEE IF WE CAN UPDATE THAT FROM NULL
   console.log(query); // so we can see the request in server terminal
 
   _.json({ status: "success", value: newComment });
