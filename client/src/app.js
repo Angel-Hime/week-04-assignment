@@ -1,5 +1,9 @@
 console.log("test");
 
+//TODO: let's have some sounds!
+// looping classical music?
+// clicker sounds?
+
 //TODO: collect user data and send to the server
 //submit event to collect user data
 
@@ -46,12 +50,54 @@ async function getDatabaseData() {
   return data;
 }
 
-getDatabaseData(); // this will action the above to pront an array of data from our database
-
 //TODO: render the data using DOM elements(one per piece of data - one dom element per column)
 
 // split the data
 
 // turn data into text elements
 
-// append the text elements to the section
+const postsContainer = document.getElementById("postsContainer");
+
+// rememeber that this is from monday of this week
+
+function createPosts(dataAsObject) {
+  //run through each object of the data array
+  dataAsObject.forEach((element) => {
+    //create userentry div to display the FULL previous post:
+    const userEntry = document.createElement("div");
+
+    //create subsection for just the name details
+    const userName = document.createElement("div");
+    // create our paragraph elements to display name details
+    const namePara = document.createElement("p");
+    const secondNamePara = document.createElement("p");
+    // add the text content from API to name details paragraph elements
+    secondNamePara.textContent = element.secondname;
+    namePara.textContent = element.firstname;
+    // append the name details paragraph elements to the subsection for name details
+    userName.appendChild(namePara);
+    userName.appendChild(secondNamePara);
+    // append the name details to the div for FULL previous post
+    userEntry.appendChild(userName);
+
+    // create the comment paragraph element
+    const commentPara = document.createElement("p");
+    // add the text content from the API to comment paragraph element
+    commentPara.textContent = element.comment;
+    // append the comment to the div for FULL previous post
+    userEntry.appendChild(commentPara);
+
+    // assign class to each FULL post --> this is the same for all of them
+    userEntry.className = "userEntry";
+
+    // append the text elements to the main posts container
+    postsContainer.appendChild(userEntry);
+  });
+}
+
+async function renderPosts() {
+  const postsData = await getDatabaseData(); // this will action the above to pront an array of data from our database
+  createPosts(postsData);
+}
+
+renderPosts();
