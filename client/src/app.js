@@ -11,7 +11,7 @@ function handleFeedbackFormSubmit(event) {
   event.preventDefault();
   const formDataTemplate = new FormData(feedbackForm);
   const formValues = Object.fromEntries(formDataTemplate);
-  console.log(formValues);
+  console.log(formValues); // this is to see our posted data
 
   // fetch the POST server route
   fetch("http://localhost:8080/newcomment", {
@@ -34,17 +34,24 @@ feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
 
 //TODO: render user data on the interface
 // fetch the GET route from the server
+// is http://localhost:8080/DATABASE_URL an API? --> lets treat it like we did on the clicker thingy
 
-const handleFeedbackData = async () => {
-  const gotData = await fetch("./src/feedback");
-  console.log(gotData);
-  const printValues = await gotData.json();
-  return printValues;
-};
+async function getDatabaseData() {
+  const response = await fetch("http://localhost:8080/DATABASE_URL/");
+  console.log(response); //Response { type: "cors", url: "http://localhost:8080/DATABASE_URL/", redirected: false, status: 200, ok: true, statusText: "OK", headers: Headers(2), body: ReadableStream, bodyUsed: false }
 
-async function main() {
-  const feedBackData = await handleFeedbackData();
-  console.log("data: ", feedBackData);
+  const data = await response.json();
+  console.log(data); // this prints the js data as array of objects
+
+  return data;
 }
-main();
-//render the data using DOM elements(one per piece of data - one dom element per column)
+
+getDatabaseData(); // this will action the above to pront an array of data from our database
+
+//TODO: render the data using DOM elements(one per piece of data - one dom element per column)
+
+// split the data
+
+// turn data into text elements
+
+// append the text elements to the section

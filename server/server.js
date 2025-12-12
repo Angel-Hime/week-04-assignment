@@ -36,13 +36,13 @@ app.get("/DATABASE_URL", async function (_, res) {
 //TODO: a route to CREATE data in the db
 app.post("/newcomment", (req, _) => {
   const newComment = req.body.formValues;
-  console.log(newComment);
+  console.log(newComment); // so we see what we are posting in the server terminal
 
   const query = db.query(
     `INSERT INTO feedback (firstname, secondname, comment) VALUES ($1, $2, $3)`,
     [newComment.firstName, newComment.secondName, newComment.commentData]
   );
-  console.log(query);
+  console.log(query); // so we can see the request in server terminal
 
   _.json({ status: "success", value: newComment });
 });
