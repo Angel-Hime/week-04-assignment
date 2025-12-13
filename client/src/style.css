@@ -179,9 +179,7 @@ input:hover {
   grid-column-start: 1;
   grid-column-end: span 1;
 
-  /* display: flex;
-  flex-direction: row; */
-  /* gap: 1vw; */
+  justify-self: left;
   text-decoration: underline;
   text-transform: capitalize;
 }

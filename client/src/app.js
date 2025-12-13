@@ -25,7 +25,7 @@ function handleFeedbackFormSubmit(event) {
     `${formValues.firstName} ${formValues.secondName} ${formValues.commentData}`
   ); // this is to see our posted data
 
-  latestPost(formValues); // try to just make this work //
+  // latestPost(formValues); // try to just make this work //
 
   // fetch the POST server route
   fetch("http://localhost:8080/newcomment/", {
@@ -35,6 +35,7 @@ function handleFeedbackFormSubmit(event) {
     },
     body: JSON.stringify({ formValues }),
   });
+
   postsContainer.innerHTML = null;
   renderPosts();
 
@@ -43,42 +44,44 @@ function handleFeedbackFormSubmit(event) {
 
 feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
 
-function latestPost(formValues) {
-  const userEntry = document.createElement("div");
-  //create subsection for just the name details
-  const userName = document.createElement("div");
-  userName.className = "userNameClass";
-  // create our paragraph elements to display name details
-  const namePara = document.createElement("p");
-  // const secondNamePara = document.createElement("p");
-  // add the text content from API to name details paragraph elements
-  // secondNamePara.textContent = element.secondname;
+// function latestPost(formValues) {
+//   const userEntry = document.createElement("div");
+//   //create subsection for just the name details
+//   const userName = document.createElement("div");
+//   userName.className = "userNameClass";
+//   // create our paragraph elements to display name details
+//   const namePara = document.createElement("p");
+//   // const secondNamePara = document.createElement("p");
+//   // add the text content from API to name details paragraph elements
+//   // secondNamePara.textContent = element.secondname;
 
-  namePara.textContent = `${formValues.firstName} ${formValues.secondName}`;
-  // append the name details paragraph elements to the subsection for name details
-  userName.appendChild(namePara);
-  // userName.appendChild(secondNamePara);
-  // append the name details to the div for FULL previous post
-  userEntry.appendChild(userName);
+//   namePara.textContent = `${formValues.firstName} ${formValues.secondName}`;
+//   // append the name details paragraph elements to the subsection for name details
+//   userName.appendChild(namePara);
+//   // userName.appendChild(secondNamePara);
+//   // append the name details to the div for FULL previous post
+//   userEntry.appendChild(userName);
 
-  // create the comment paragraph element
-  const commentPara = document.createElement("p");
-  // add the text content from the API to comment paragraph element
-  commentPara.textContent = `"${formValues.commentData}"`;
-  // append the comment to the div for FULL previous post
-  userEntry.appendChild(commentPara);
+//   // create the comment paragraph element
+//   const commentPara = document.createElement("p");
+//   // add the text content from the API to comment paragraph element
+//   commentPara.textContent = `"${formValues.commentData}"`;
+//   // append the comment to the div for FULL previous post
+//   userEntry.appendChild(commentPara);
 
-  // assign class to each FULL post --> this is the same for all of them
-  userEntry.className = "userEntry";
+//   // assign class to each FULL post --> this is the same for all of them
+//   userEntry.className = "userEntry";
 
-  // append the text elements to the main posts container
-  postsContainer.appendChild(userEntry);
-  // this should call the function to clear the form after posting
-}
+//   // append the text elements to the main posts container
+//   postsContainer.appendChild(userEntry);
+//   // this should call the function to clear the form after posting
+// }
 //replacing the full form with a clean one.
 
 // To remove data from your inputs, an idea could be: in your week 2 assignment, how did you remove the large image before adding the new image clicked? That could be a way to remove the data from the form inputs
+
 function clearForm() {
+  //!Clears form
   //get container
   const firstName = document.getElementById("firstName");
   firstName.innerHTML = null;
@@ -163,7 +166,9 @@ async function getDatabaseData() {
 // turn data into text elements
 
 function createPosts(dataAsObject) {
+  // TODO: create a header for User Comments
   postsContainer.style.backgroundColor = "pink";
+
   //
 
   //clear current
@@ -205,7 +210,7 @@ function createPosts(dataAsObject) {
     //TODO: add the likes value to the page
     const postLikes = document.createElement("p");
     postLikes.className = "likesClass";
-    postLikes.textContent = `${element.likes} likes`;
+    postLikes.textContent = `💖 ${element.likes}`;
     userEntry.appendChild(postLikes);
 
     // append the text elements to the main posts container
@@ -217,7 +222,7 @@ function createPosts(dataAsObject) {
 
     //add a like button
     const likeButton = document.createElement("button");
-    likeButton.textContent = "Like";
+    likeButton.textContent = "💖";
     likeButton.className = "likeButton";
     // logic for posting to the likes column of a database table
 
@@ -227,7 +232,8 @@ function createPosts(dataAsObject) {
 
     function handleLikeButton() {
       likeButton.innerHTML = null;
-      likeButton.textContent = "<3"; //replace with heart
+      likeButton.textContent = "💖"; //replace with heart
+      likeButton.style.backgroundColor = "gray";
       const likesound = document.createElement("audio");
       likesound.src = "/audio/click-02.mp3";
       likesound.volume = 0.5;
@@ -254,7 +260,7 @@ function createPosts(dataAsObject) {
 
     //add a delete button
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.textContent = "❌";
     deleteButton.className = "deleteButton";
     // logic for delete the row from database table
 
