@@ -33,16 +33,8 @@ app.get("/feedback", async function (_, res) {
   res.json(query.rows);
 });
 
-//TODO: a route to READ data from the db
-app.get("/feedback/new", async function (_, res) {
-  const query = await db.query(
-    `SELECT firstname, secondname, comment, likes FROM feedback;`
-  );
-  console.log(query);
-  res.json(query.rows);
-});
-
 //TODO: a route to CREATE data in the db
+//! POSTS
 app.post("/newcomment", (req, _) => {
   const newComment = req.body.formValues;
   // console.log(newComment); // so we see what we are posting in the server terminal
@@ -54,4 +46,33 @@ app.post("/newcomment", (req, _) => {
   console.log(query); // so we can see the request in server terminal
 
   _.json({ status: "success", value: newComment });
+});
+
+//! UPDATES LIKES
+app.post("/likes", (req, _) => {
+  const newLikes = req.body.newLikes;
+  const firstName = req.body.firstname;
+  // console.log(newComment); // so we see what we are posting in the server terminal
+
+  const query = db.query(`UPDATE feedback SET likes=$1 WHERE firstname=$2`, [
+    newLikes,
+    firstName,
+  ]);
+  console.log(query); // so we can see the request in server terminal
+
+  _.json({ status: "success", value: newLikes, firstName });
+});
+
+//! DELETES
+app.post("/delete", (req, _) => {
+  const newLikes = req.body.newLikes;
+  const firstName = req.body.firstname;
+  // console.log(newComment); // so we see what we are posting in the server terminal
+
+  const query = db.query(`DELETE from feedback WHERE firstname=$1`, [
+    firstName,
+  ]);
+  console.log(query); // so we can see the request in server terminal
+
+  _.json({ status: "success", value: firstName });
 });

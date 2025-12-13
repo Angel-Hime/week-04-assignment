@@ -11,11 +11,21 @@ const feedbackForm = document.getElementById("feedbackForm");
 
 console.log(feedbackForm); // this is just to check the form in console
 
+const postsContainer = document.getElementById("postsContainer");
+
 function handleFeedbackFormSubmit(event) {
+  const submitSound = document.createElement("audio");
+  submitSound.src = "/audio/click-02.mp3";
+  submitSound.volume = 0.5;
+  submitSound.play();
   event.preventDefault();
   const formDataTemplate = new FormData(feedbackForm);
   const formValues = Object.fromEntries(formDataTemplate);
-  console.log(formValues); // this is to see our posted data
+  console.log(
+    `${formValues.firstName} ${formValues.secondName} ${formValues.commentData}`
+  ); // this is to see our posted data
+
+  latestPost(formValues); // try to just make this work //
 
   // fetch the POST server route
   fetch("http://localhost:8080/newcomment/", {
@@ -25,23 +35,15 @@ function handleFeedbackFormSubmit(event) {
     },
     body: JSON.stringify({ formValues }),
   });
-
+  postsContainer.innerHTML = null;
   renderPosts();
-  latestPost(); // try to just make this work
+
   clearForm();
 }
 
 feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
 
-const submitButton = document.getElementById("submitFeedback");
-submitButton.addEventListener("click", () => {
-  const submitSound = document.createElement("audio");
-  submitSound.src = "./public/audio/click-02.mp3";
-  submitSound.volume = 0.5;
-  submitSound.play();
-});
-
-function latestPost() {
+function latestPost(formValues) {
   const userEntry = document.createElement("div");
   //create subsection for just the name details
   const userName = document.createElement("div");
@@ -161,12 +163,12 @@ async function getDatabaseData() {
 // turn data into text elements
 
 function createPosts(dataAsObject) {
-  const postsContainer = document.getElementById("postsContainer");
   postsContainer.style.backgroundColor = "pink";
   //
 
   //clear current
-  postsContainer.innerHTML = null;
+  // postsContainer.innerHTML = null;
+
   //run through each object of the data array
   dataAsObject.forEach((element) => {
     //create userentry div to display the FULL previous post:
@@ -190,6 +192,8 @@ function createPosts(dataAsObject) {
 
     // create the comment paragraph element
     const commentPara = document.createElement("p");
+    // give commentPara class to style
+    commentPara.className = "commentClass";
     // add the text content from the API to comment paragraph element
     commentPara.textContent = `"${element.comment}"`;
     // append the comment to the div for FULL previous post
@@ -198,12 +202,18 @@ function createPosts(dataAsObject) {
     // assign class to each FULL post --> this is the same for all of them
     userEntry.className = "userEntry";
 
+    //TODO: add the likes value to the page
+    const postLikes = document.createElement("p");
+    postLikes.className = "likesClass";
+    postLikes.textContent = `${element.likes} likes`;
+    userEntry.appendChild(postLikes);
+
     // append the text elements to the main posts container
     postsContainer.appendChild(userEntry);
 
     // TODO: add a nav with buttons for like and delete
-    const userEntryNav = document.createElement("nav");
-    userEntryNav.className = "userEntryNav";
+    const userEntryDiv = document.createElement("div");
+    userEntryDiv.className = "userEntryDiv";
 
     //add a like button
     const likeButton = document.createElement("button");
@@ -211,37 +221,69 @@ function createPosts(dataAsObject) {
     likeButton.className = "likeButton";
     // logic for posting to the likes column of a database table
 
-    likeButton.addEventListener("click", () => {
+    likeButton.addEventListener("click", handleLikeButton);
+
+    console.log(element.likes);
+
+    function handleLikeButton() {
+      likeButton.innerHTML = null;
+      likeButton.textContent = "<3"; //replace with heart
       const likesound = document.createElement("audio");
-      likesound.src = "./public/audio/click-02.mp3";
+      likesound.src = "/audio/click-02.mp3";
       likesound.volume = 0.5;
       likesound.play();
-    });
-    // const like =
-    // }
-    // function handleFeedbackFormSubmit(event) {
-    //   event.preventDefault();
-    //   const formDataTemplate = new FormData(feedbackForm);
-    //   const formValues = Object.fromEntries(formDataTemplate);
-    //   console.log(formValues); // this is to see our posted data
 
-    //   // fetch the POST server route
-    //   fetch("http://localhost:8080/newcomment", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ formValues }),
-    //   });
-    userEntryNav.appendChild(likeButton);
+      console.log(element.likes);
+
+      const newLikes = element.likes + 1;
+      console.log(newLikes);
+      const firstname = element.firstname;
+      console.log(firstname);
+      // fetch the POST server route
+      fetch("http://localhost:8080/likes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newLikes, firstname }),
+      });
+
+      //need to figure out how to reRender
+      //!render likes
+    }
+
+    //add a delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "deleteButton";
+    // logic for delete the row from database table
+
+    deleteButton.addEventListener("click", handleDeleteButton);
+
+    function handleDeleteButton() {
+      //!NEED TO RERENDER THE POSTS
+      const deleteSounds = document.createElement("audio");
+      deleteSounds.src = "/audio/click-02.mp3";
+      deleteSounds.volume = 0.5;
+      deleteSounds.play();
+
+      const firstname = element.firstname;
+      console.log(firstname);
+      // fetch the POST server route
+      fetch("http://localhost:8080/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstname }),
+      });
+    }
+
+    userEntryDiv.appendChild(likeButton);
+    userEntryDiv.appendChild(deleteButton);
+
     //apend to the userEntry nav
-    userEntry.appendChild(userEntryNav);
-    // const deleteButton = document.createElement("button");
-    // // logic for deleting a row of a database table
-
-    // //apend to the userEntry nav
-
-    // //apend userEntry nav to userEntry div
+    userEntry.appendChild(userEntryDiv);
   });
 }
 
@@ -250,4 +292,4 @@ async function renderPosts() {
   createPosts(postsData);
 }
 //renders the previous users' posts
-// renderPosts();
+renderPosts();
