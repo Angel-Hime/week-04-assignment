@@ -213,14 +213,11 @@ input:hover {
 }
 
 .likeButton:hover {
-  animation-name: shake;
-  animation-duration: 30ms;
-  animation-iteration-count: 2;
   cursor: pointer;
   animation-name: glow;
   animation-duration: 5s;
   animation-iteration-count: infinite;
-  box-shadow: inset 5px 5px 10px whitesmoke;
+  box-shadow: inset 1px 1px 10px whitesmoke;
 }
 
 .deleteButton {
@@ -232,11 +229,8 @@ input:hover {
 .deleteButton:hover {
   animation-name: shake;
   animation-duration: 30ms;
-  animation-iteration-count: 2;
-  cursor: pointer;
-  animation-name: glow;
-  animation-duration: 5s;
   animation-iteration-count: infinite;
+  cursor: pointer;
   box-shadow: inset 5px 5px 10px whitesmoke;
 }
 
