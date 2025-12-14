@@ -44,41 +44,6 @@ function handleFeedbackFormSubmit(event) {
 
 feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
 
-// function latestPost(formValues) {
-//   const userEntry = document.createElement("div");
-//   //create subsection for just the name details
-//   const userName = document.createElement("div");
-//   userName.className = "userNameClass";
-//   // create our paragraph elements to display name details
-//   const namePara = document.createElement("p");
-//   // const secondNamePara = document.createElement("p");
-//   // add the text content from API to name details paragraph elements
-//   // secondNamePara.textContent = element.secondname;
-
-//   namePara.textContent = `${formValues.firstName} ${formValues.secondName}`;
-//   // append the name details paragraph elements to the subsection for name details
-//   userName.appendChild(namePara);
-//   // userName.appendChild(secondNamePara);
-//   // append the name details to the div for FULL previous post
-//   userEntry.appendChild(userName);
-
-//   // create the comment paragraph element
-//   const commentPara = document.createElement("p");
-//   // add the text content from the API to comment paragraph element
-//   commentPara.textContent = `"${formValues.commentData}"`;
-//   // append the comment to the div for FULL previous post
-//   userEntry.appendChild(commentPara);
-
-//   // assign class to each FULL post --> this is the same for all of them
-//   userEntry.className = "userEntry";
-
-//   // append the text elements to the main posts container
-//   postsContainer.appendChild(userEntry);
-//   // this should call the function to clear the form after posting
-// }
-//replacing the full form with a clean one.
-
-// To remove data from your inputs, an idea could be: in your week 2 assignment, how did you remove the large image before adding the new image clicked? That could be a way to remove the data from the form inputs
 
 function clearForm() {
   //!Clears form
@@ -257,8 +222,7 @@ function createPosts(dataAsObject) {
         body: JSON.stringify({ newLikes, firstname }),
       });
 
-      //need to figure out how to reRender
-      //!render likes
+      postLikes.textContent = `💖 ${newLikes}`;
     }
 
     //add a delete button
@@ -286,6 +250,14 @@ function createPosts(dataAsObject) {
         },
         body: JSON.stringify({ firstname }),
       });
+       namePara.textContent = "DELETED";
+      commentPara.textContent = "DELETED";
+      deleteButton.innerHTML = null;
+      deleteButton.textContent = "❌";
+      deleteButton.style.backgroundColor = "gray";
+      likeButton.innerHTML = null;
+      likeButton.textContent = "💖"; //replace with heart
+      likeButton.style.backgroundColor = "gray";
     }
 
     userEntryDiv.appendChild(likeButton);
