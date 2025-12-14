@@ -1,3 +1,6 @@
+Assignment feedback form page
+-- please be advised that the server sometimes takes a little whiles to catch up so that some of the page contents won't load on first page load. Please give it a little bit of time and refresh the page so that all functionality is presented.
+
 Requirements:
 
     🎯 Ensure your HTML form is working and submitting data into the database as expected. ✔️
