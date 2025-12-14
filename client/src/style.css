@@ -236,7 +236,7 @@ input:hover {
 
 .deleteButton:hover {
   animation-name: shake;
-  animation-duration: 30ms;
+  animation-duration: 0.5s;
   animation-iteration-count: infinite;
   cursor: pointer;
   box-shadow: inset 5px 5px 10px whitesmoke;
