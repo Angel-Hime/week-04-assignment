@@ -28,7 +28,7 @@ function handleFeedbackFormSubmit(event) {
   // latestPost(formValues); // try to just make this work //
 
   // fetch the POST server route
-  fetch("http://localhost:8080/newcomment/", {
+  fetch("https://week-04-assignment-server.onrender.com/newcomment/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,9 +37,9 @@ function handleFeedbackFormSubmit(event) {
   });
 
   postsContainer.innerHTML = null;
-  renderPosts();
-
-  clearForm();
+  // renderPosts();
+  location.reload();
+  // clearForm();
 }
 
 feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
@@ -150,7 +150,9 @@ clearForm();
 // is http://localhost:8080/DATABASE_URL an API? --> lets treat it like we did on the clicker thingy
 
 async function getDatabaseData() {
-  const response = await fetch("http://localhost:8080/feedback/");
+  const response = await fetch(
+    "https://week-04-assignment-server.onrender.com/feedback/"
+  );
   // console.log(response); //Response { type: "cors", url: "http://localhost:8080/DATABASE_URL/", redirected: false, status: 200, ok: true, statusText: "OK", headers: Headers(2), body: ReadableStream, bodyUsed: false }
 
   const data = await response.json();
@@ -234,6 +236,7 @@ function createPosts(dataAsObject) {
       likeButton.innerHTML = null;
       likeButton.textContent = "💖"; //replace with heart
       likeButton.style.backgroundColor = "gray";
+
       const likesound = document.createElement("audio");
       likesound.src = "/audio/click-02.mp3";
       likesound.volume = 0.5;
@@ -246,7 +249,7 @@ function createPosts(dataAsObject) {
       const firstname = element.firstname;
       console.log(firstname);
       // fetch the POST server route
-      fetch("http://localhost:8080/likes", {
+      fetch("https://week-04-assignment-server.onrender.com/likes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -276,7 +279,7 @@ function createPosts(dataAsObject) {
       const firstname = element.firstname;
       console.log(firstname);
       // fetch the POST server route
-      fetch("http://localhost:8080/delete", {
+      fetch("https://week-04-assignment-server.onrender.com/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

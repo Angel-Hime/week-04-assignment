@@ -35,20 +35,4 @@ Reflection
 
     I did struggle when it came to figuring out which port and route went where.
 
-    I wanted to make it so the submit button was something that would clear the form as well as load the latest user comment below the submission form. I did have suspicions that this would be innerhtml work but it was with Manny's help that I was able to do this as I was not sure as to where I should put the sections where I was rebuilding the form. I struggled with getting the fresh data straight from the server though; I couldn't display the newest post.
-
-Please also provide an assignment reflection in your project README.md file.
-Required
-
-    🎯 What requirements did you achieve?
-    🎯 Were there any requirements or goals that you were unable to achieve?
-    🎯 If so, what was it that you found difficult about these tasks?
-
-References:
-
-    code sources:
-        -
-
-
-    content sources:
-        -
+    I wanted to make it so the submit button was something that would clear the form as well as load the latest user comment below the submission form. I did have suspicions that this would be innerhtml work but it was with Manny's help that I was able to do this as I was not sure as to where I should put the sections where I was rebuilding the form. I struggled with getting the fresh data straight from the server though; I couldn't display the newest post. I just could not figure out how to render the newest post again, so the fact that I figured out how the complete the likes and delete functions kinda felt redundant. Could I please get some help with this?
