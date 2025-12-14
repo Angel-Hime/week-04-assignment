@@ -37,9 +37,9 @@ function handleFeedbackFormSubmit(event) {
   });
 
   postsContainer.innerHTML = null;
-  // renderPosts();
-  location.reload();
-  // clearForm();
+  renderPosts();
+
+  clearForm();
 }
 
 feedbackForm.addEventListener("submit", handleFeedbackFormSubmit);
